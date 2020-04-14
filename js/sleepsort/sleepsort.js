@@ -1,21 +1,23 @@
 async function sleepSort(toSort) {
-  sorted = [];
+  return new Promise((resolve) => {
+    sorted = [];
 
-  async function sleep(t) {
-    return new Promise((res) => {
-      setTimeout(() => {
-        sorted.push(t);
+    async function sleep(t) {
+      return new Promise((res) => {
+        setTimeout(() => {
+          sorted.push(t);
 
-        res();
-      }, t);
+          res();
+        }, t);
+      });
+    }
+
+    Promise.all(toSort.map((s) => sleep(s))).then(() => {
+      resolve(sorted);
     });
-  }
-
-  console.log("calling promises");
-
-  Promise.all(toSort.map((s) => sleep(s))).then(() => {
-    console.log("final sorted:", sorted);
   });
 }
 
-sleepSort([5, 3, 56, 2, 3, 6, 7, 3, 2, 5]);
+sleepSort([5, 3, 56, 2, 3, 6, 7, 3, 2, 5]).then((res) => {
+  console.log("returned res:", sorted);
+});
