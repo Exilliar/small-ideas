@@ -1,5 +1,7 @@
+import ChipValue from "./ChipValues";
+
 interface ChipTotal {
-    value: number;
+    value: ChipValue;
     total: number;
 }
 

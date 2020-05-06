@@ -1,4 +1,5 @@
 import ChipTotal from './ChipTotal';
+import ChipValue from './ChipValues';
 
 export default class ChipTotals {
     _chips: ChipTotal[] = new Array<ChipTotal>();
@@ -7,7 +8,7 @@ export default class ChipTotals {
         return this._chips;
     }
 
-    addChip(value: number) {
+    addChip(value: ChipValue) {
         for (let i = 0; i < this.chips.length; i++) {
             if (this.chips[i].value === value) {
                 this.chips[i].total ++;

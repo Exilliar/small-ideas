@@ -1,7 +1,8 @@
 import ChipTotals from './ChipTotals';
+import ChipValue from './ChipValues';
 
 function calcChips(amount: number) {
-    const chipValues = [1000,500,200,100,50,10,1];
+    const chipValues: ChipValue[] = [1000,500,200,100,50,10,1];
 
     let chips = new ChipTotals();
 
