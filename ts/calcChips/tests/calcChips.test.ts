@@ -1,15 +1,18 @@
 import CalcChips from '../src/calcChips';
+import ChipTotal from '../src/ChipTotal';
 
 describe('calcChips', function() {
     it('returns correct chips', function() {
-        let result = CalcChips.calcChips(25);
+        const result = CalcChips.calcChips(25);
 
-        expect(result).toBe([{
-            value: 20,
-            total: 1
+        const expected: ChipTotal[] = [{
+            value: 10,
+            total: 2
         }, {
-            value: 5,
-            total: 1
-        }]);
+            value: 1,
+            total: 5
+        }]
+
+        expect(result).toEqual(expected);
     })
 });

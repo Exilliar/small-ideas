@@ -7,3 +7,13 @@ These are for programs made in typescript (suprisingly enough). Despite typescri
 Each project should have a `tsconfig.json` file.
 
 To compile the project run `tsc` which should compile the project then `node mainTsFile.js` to run it.
+
+## How to set up jest in a file
+
+1. Move code into ./src file (not neccassery but makes it look nicer)
+2. Run `npm init` the only input that matters is that the answer to the testing q should be `jest`
+3. Copy paste the `jest.config.js` file that is in this file
+4. Write the tests in a ./test folder (at the same level as the ./src folder). The file should be called `name.test.ts`
+5. Run `npm t` to run the test
+
+Anything goes wrong check [this repo](https://github.com/ChiragRupani/TSUnitTestsSetup) and [this article](https://medium.com/@RupaniChirag/writing-unit-tests-in-typescript-d4719b8a0a40)
