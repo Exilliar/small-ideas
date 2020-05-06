@@ -2,7 +2,7 @@ import ChipTotal from "./models/ChipTotal.model";
 import ChipValue from "./models/ChipValues.model";
 
 export default class ChipTotals {
-  _chips: ChipTotal[] = new Array<ChipTotal>();
+  private _chips: ChipTotal[] = new Array<ChipTotal>();
 
   get chips() {
     return this._chips;
