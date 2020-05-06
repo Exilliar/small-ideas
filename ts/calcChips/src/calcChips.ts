@@ -1,7 +1,6 @@
 import ChipTotals from './ChipTotals';
 
-export default class CalcChips {
-static calcChips(amount: number) {
+function calcChips(amount: number) {
     const chipValues = [1000,500,200,100,50,10,1];
 
     let chips = new ChipTotals();
@@ -15,6 +14,5 @@ static calcChips(amount: number) {
 
     return chips.chips;
 }
-}
 
-// export default calcChips;
+export default calcChips;

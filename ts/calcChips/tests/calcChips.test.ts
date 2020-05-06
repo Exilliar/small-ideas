@@ -1,9 +1,9 @@
-import CalcChips from '../src/calcChips';
+import calcChips from '../src/calcChips';
 import ChipTotal from '../src/ChipTotal';
 
 describe('calcChips', function() {
     it('returns correct chips', function() {
-        const result = CalcChips.calcChips(25);
+        const result = calcChips(25);
 
         const expected: ChipTotal[] = [{
             value: 10,
