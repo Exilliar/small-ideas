@@ -21,4 +21,10 @@ describe("findPassword", function () {
     expect(findPassword(new User(pass2))).toBe(pass2);
     expect(findPassword(new User(pass3))).toBe(pass3);
   });
+  it("Should return 'not found' if the password cannot be found", function () {
+    // just a random string above the max len limit
+    const pass = "poihdfnapofihaeoipghoisndgiposhbiadoinfafef";
+
+    expect(findPassword(new User(pass))).toBe("not found");
+  });
 });
