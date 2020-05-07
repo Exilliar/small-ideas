@@ -17,6 +17,7 @@ else
   # Create gitignore
   echo ".vscode
 **/src/*.js
+**/tests/*.js
 *.js.map
 node_modules" > .gitignore
 
