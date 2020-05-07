@@ -15,6 +15,4 @@ function findPassword(user: User) {
   return "not found";
 }
 
-console.log(findPassword(new User("AB")));
-
 export default findPassword;
