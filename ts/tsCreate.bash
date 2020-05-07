@@ -16,8 +16,8 @@ else
 
   # Create gitignore
   echo ".vscode
-**/src/*.js
-**/tests/*.js
+**/src/**/*.js: true,
+**/tests/**/*.js: true,
 *.js.map
 node_modules" > .gitignore
 
@@ -58,9 +58,6 @@ By default this uses jest for testing. To run the test, create the test files in
 
 For more info on jest see the [docs](https://jestjs.io/docs/en/getting-started)' > README.md
 
-  # TODO add settings to .vscode folder. Add ts file to src and tests called the same name as the project
-  # Add check for to make sure that there is a name for the project
-
   # Create basic ts files for src and tests
   touch src/$1.ts
   touch tests/$1.test.ts
@@ -74,8 +71,8 @@ For more info on jest see the [docs](https://jestjs.io/docs/en/getting-started)'
     "**/.gh": true,
     "**/CVS": true,
     "**/.DS_Store": true,
-    "**/src/*.js": true,
-    "**/tests/*.js": true,
+    "**/src/**/*.js": true,
+    "**/tests/**/*.js": true,
     "**/*.js.map": true,
   }
 }' > .vscode/settings.json
