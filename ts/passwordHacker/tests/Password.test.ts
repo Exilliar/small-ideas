@@ -24,6 +24,10 @@ describe("Password class", function () {
     incIndexes(password, possChars.length);
 
     expect(password.indexes).toEqual([0, 1, 0]);
+
+    incIndexes(password, 1);
+
+    expect(password.indexes).toEqual([0, 1, 1]);
   });
 
   it("Should return -1 in first index of array when max is reached", function () {
