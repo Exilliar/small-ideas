@@ -74,6 +74,7 @@ For more info on jest see the [docs](https://jestjs.io/docs/en/getting-started)'
     "**/CVS": true,
     "**/.DS_Store": true,
     "**/src/*.js": true,
+    "**/tests/*.js": true,
     "**/*.js.map": true,
   }
 }' > .vscode/settings.json
