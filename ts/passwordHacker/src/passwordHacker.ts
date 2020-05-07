@@ -16,3 +16,5 @@ function findPassword(user: User) {
 }
 
 console.log(findPassword(new User("AB")));
+
+export default findPassword;

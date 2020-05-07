@@ -1,13 +1,11 @@
-import password from './data/password';
-
 export default class User {
-    private password: string;
+  private password: string;
 
-    constructor(pass: string) {
-        this.password = pass;
-    }
+  constructor(pass: string) {
+    this.password = pass;
+  }
 
-    accessAccount(pass: string) {
-        return pass === this.password;
-    }
+  accessAccount(pass: string) {
+    return pass === this.password;
+  }
 }
