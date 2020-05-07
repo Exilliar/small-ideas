@@ -16,47 +16,46 @@ else
 
   # Create gitignore
   echo ".vscode
-  **/src/*.js
-  *.js.map
-  node_modules" > .gitignore
+**/src/*.js
+*.js.map
+node_modules" > .gitignore
 
   # Create the jest config
   echo 'module.exports = {
-    transform: {
-      "^.+\\.ts?$": "ts-jest",
-    },
-    testEnvironment: "node",
-    testRegex: "/tests/.*\\.(test|spec)?\\.(ts|tsx|js)$",
-    moduleFileExtensions: ["ts", "tsx", "js", "jsx", "json", "node"],
-  };' > jest.config.js
+  transform: {
+    "^.+\\.ts?$": "ts-jest",
+  },
+  testEnvironment: "node",
+  testRegex: "/tests/.*\\.(test|spec)?\\.(ts|tsx|js)$",
+  moduleFileExtensions: ["ts", "tsx", "js", "jsx", "json", "node"],
+};' > jest.config.js
 
   # Create the tsconfig.json
   echo '{
-      "compilerOptions": {
-          "target": "es5",
-          "module": "commonjs",
-          "sourceMap": true
-      }
-  }' > tsconfig.json
+    "compilerOptions": {
+        "target": "es5",
+        "module": "commonjs",
+        "sourceMap": true
+    }
+}' > tsconfig.json
 
   # Create the README.md
 
   echo '# '$1'
 
-  ## Compiling/running
+## Compiling/running
 
-  Use command `tsc` when in the ./src folder to compile the project. This will generate .js files that can then be run with `node projectName.js`.
+Use command `tsc` when in the ./src folder to compile the project. This will generate .js files that can then be run with `node projectName.js`.
 
-  For more info on typscript see the [docs](https://www.typescriptlang.org/docs/home.html)
+For more info on typscript see the [docs](https://www.typescriptlang.org/docs/home.html)
 
-  NOTE The js files will not be visible in vscode, this can be changed in the settings.json in .vscode. The files will still be there to be run regardless
+NOTE The js files will not be visible in vscode, this can be changed in the settings.json in .vscode. The files will still be there to be run regardless
 
-  ## Testing
+## Testing
 
-  By default this uses jest for testing. To run the test, create the test files in the ./tests folder with the name `name.test.ts`. Then use command `npm t` to run the test.
+By default this uses jest for testing. To run the test, create the test files in the ./tests folder with the name `name.test.ts`. Then use command `npm t` to run the test.
 
-  For more info on jest see the [docs](https://jestjs.io/docs/en/getting-started)
-  ' > README.md
+For more info on jest see the [docs](https://jestjs.io/docs/en/getting-started)' > README.md
 
   # TODO add settings to .vscode folder. Add ts file to src and tests called the same name as the project
   # Add check for to make sure that there is a name for the project
@@ -68,41 +67,41 @@ else
   # Create .vscode settings.json file
 
   echo '{
-    "files.exclude": {
-      "**/.git": true,
-      "**/.svn": true,
-      "**/.gh": true,
-      "**/CVS": true,
-      "**/.DS_Store": true,
-      "**/src/*.js": true,
-      "**/*.js.map": true,
-    }
-  }' > .vscode/settings.json
+  "files.exclude": {
+    "**/.git": true,
+    "**/.svn": true,
+    "**/.gh": true,
+    "**/CVS": true,
+    "**/.DS_Store": true,
+    "**/src/*.js": true,
+    "**/*.js.map": true,
+  }
+}' > .vscode/settings.json
 
 
   # Create the package.json then npm i
 
   echo '{
-    "name": "'$1'",
-    "version": "1.0.0",
-    "description": "",
-    "main": "index.js",
-    "directories": {
-      "test": "tests"
-    },
-    "dependencies": {
-      "@types/jest": "^25.2.1",
-      "jest": "^26.0.1",
-      "ts-jest": "^25.5.0",
-      "typescript": "^3.8.3"
-    },
-    "devDependencies": {},
-    "scripts": {
-      "test": "jest"
-    },
-    "author": "",
-    "license": "ISC"
-  }
+  "name": "'$1'",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "directories": {
+    "test": "tests"
+  },
+  "dependencies": {
+    "@types/jest": "^25.2.1",
+    "jest": "^26.0.1",
+    "ts-jest": "^25.5.0",
+    "typescript": "^3.8.3"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "jest"
+  },
+  "author": "",
+  "license": "ISC"
+}
   ' > package.json
 
   npm i

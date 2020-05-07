@@ -2,6 +2,16 @@
 
 These are for programs made in typescript (suprisingly enough). Despite typescript and js being very similar I chose to have 2 separate folders just to have the slight distinction from whether I can have types/interfaces/etc and when I can't.
 
+## Setting up a new project
+
+There is a bash script which will handle setting up a new project.
+
+To run it use command `bash tsCreate.bash projectName`
+
+This script must be run from this directory. It must contain a project name and that project name must not already be a file.
+
+An example of the structure it creates is in ./example
+
 ## How to run each file
 
 Each project should have a `tsconfig.json` file.
