@@ -1,5 +1,7 @@
 # passwordHacker
 
+A simple script for brute forcing a password login
+
 ## Compiling/running
 
 Use command `tsc` when in the ./src folder to compile the project. This will generate .js files that can then be run with `node projectName.js`.
