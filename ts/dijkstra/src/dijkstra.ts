@@ -7,17 +7,13 @@ function dijkstra(nodes: Node[], start: Node, end: Node) {
     calcDists(currentNode);
     sortNodes(nodes);
     currentNode = getShortestNode(nodes);
-    // console.log("shortest:", currentNode);
   }
-
-  console.log("final", getPath(end, start));
 
   return getPath(end, start);
 }
 
 export function calcDists(node: Node) {
   const currentDist = node.distTo;
-  console.log("visiting:", node);
 
   node.paths.forEach((n) => {
     const dist = currentDist + n.distance;
@@ -25,7 +21,6 @@ export function calcDists(node: Node) {
     if ((dist < n.node.distTo || !n.node.distTo) && n.node.visited == false) {
       n.node.distTo = dist;
       n.node.prevNode = node;
-      //   console.log("updating", n.node);
     }
   });
 
@@ -40,7 +35,6 @@ export function sortNodes(nodes: Node[]) {
     }
     return 0;
   });
-  console.log("sorted nodes:", nodes);
 }
 // get the shortest node that has not yet been visited
 export function getShortestNode(nodes: Node[]): Node {
@@ -53,18 +47,13 @@ export function getShortestNode(nodes: Node[]): Node {
 export function getPath(end: Node, start: Node): Node[] {
   let route = [end];
   let currentNode = end;
-  //   console.log("end", currentNode);
 
   while (currentNode.id !== start.id) {
-    // console.log("loop");
     currentNode = currentNode.prevNode;
-    // console.log(currentNode);
     route.push(currentNode);
   }
 
-  //   route.push(start);
-
-  return route;
+  return route.reverse();
 }
 
 export default dijkstra;

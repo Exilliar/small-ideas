@@ -3,7 +3,7 @@ import Node from "../src/Node";
 
 // link to graph used for tests https://miro.medium.com/max/2944/1*nXlEmHAnu3dVBOnJAfPaAg.jpeg
 
-describe("dijkstra", function () {
+describe("dijkstra, simple graph", function () {
   let nodes: Node[];
   let a: Node;
   let b: Node;
@@ -45,8 +45,14 @@ describe("dijkstra", function () {
 
   it("should work out the correct path", function () {
     const actual = dijkstra(nodes, a, d);
-    const expected = [d, c, a];
+    const expected = [a, c, d];
 
     expect(actual).toEqual(expected);
   });
+
+  it("should work for more complicated paths", function () {});
+
+  it("should have the correct final distance in end node", function () {});
 });
+
+describe("dijkstra, more complex graph", function () {});
