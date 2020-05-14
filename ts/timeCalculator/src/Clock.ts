@@ -1,4 +1,3 @@
-import Time from "./models/Time";
 import Unit from "./models/Unit";
 
 export default class Clock {

@@ -1,4 +1,4 @@
 export default interface AddRes {
-    val: number;
-    carry: number;
+  val: number;
+  carry: number;
 }
