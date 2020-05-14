@@ -2,39 +2,25 @@ import Time from "./models/Time";
 import Unit from "./models/Unit";
 
 export default class Clock {
-  private hour: Unit = { value: 0, limit: 24 };
-  private minute: Unit = { value: 0, limit: 60 };
-  private second: Unit = { value: 0, limit: 60 };
+  private _hour: Unit = { value: 0, max: 24 };
+  private _minute: Unit = { value: 0, max: 60 };
+  private _second: Unit = { value: 0, max: 60 };
 
-  private timeArray = new Array<Unit>();
+  private _timeArray = new Array<Unit>();
 
   constructor(h: number, m: number, s: number) {
-    this.hour.value = h;
-    this.minute.value = m;
-    this.second.value = s;
+    this._hour.value = h;
+    this._minute.value = m;
+    this._second.value = s;
 
-    this.timeArray = [this.hour, this.minute, this.second];
+    this._timeArray = [this._hour, this._minute, this._second];
   }
 
-  add(clock: Clock, toInc = this.timeArray.length - 1) {
-    let arr1 = this.timeArray;
-    let arr2 = clock.timeArray;
-
-    if (toInc < 0) {
-      this.timeArray[0].value = -1;
-      return;
-    } else if (this.timeArray[])
+  get timeArray() {
+    return this._timeArray;
   }
 
-  get time(): Time {
-    return {
-      hour: this.hour.value,
-      minute: this.minute.value,
-      second: this.second.value,
-    };
+  get numUnits() {
+    return this._timeArray.length;
   }
-
-  // get timeArray() {
-  //   return [this.hour, this.minute, this.second];
-  // }
 }
