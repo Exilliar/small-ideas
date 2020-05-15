@@ -55,5 +55,12 @@ export function getPath(end: Node, start: Node): Node[] {
 
   return route.reverse();
 }
+function printPath(nodes: Node[]) {
+  let arr1 = new Array<string>();
+  nodes.forEach(n => {
+    arr1.push(n.id);
+  });
+  console.log("final:", arr1);
+}
 
 export default dijkstra;
