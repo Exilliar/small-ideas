@@ -13,7 +13,7 @@ describe("dijkstra, simple graph", function () {
 
   beforeEach(function () {
     // create all nodes
-    a = new Node("A");
+    a = new Node("A", 0);
     b = new Node("B");
     c = new Node("C");
     d = new Node("D");
@@ -158,6 +158,7 @@ describe("dijkstra, more complex graph", function () {
   });
 
   it("should work for path in video", function () {
+    s.distTo = 0; // set as starting node
     const actual = dijkstra(nodes, s, e);
     const expected = [s, b, h, g, e];
 
@@ -165,6 +166,7 @@ describe("dijkstra, more complex graph", function () {
   });
 
   it("should work for another path", function () {
+    a.distTo = 0; // set as starting node
     const actual = dijkstra(nodes, a, j);
     const expected = [a, b, s, c, l, j];
 
@@ -172,6 +174,7 @@ describe("dijkstra, more complex graph", function () {
   });
 
   it("should come to the correct final distance for first path", function () {
+    s.distTo = 0;
     const actual = dijkstra(nodes, s, e)[4].distTo;
     const expected = 7;
 
@@ -179,9 +182,10 @@ describe("dijkstra, more complex graph", function () {
   });
 
   it("should come to the correct final distance for second path", function () {
+    a.distTo = 0;
     const actual = dijkstra(nodes, a, j)[5].distTo;
     const expected = 14;
 
     expect(actual).toBe(expected);
-  })
+  });
 });

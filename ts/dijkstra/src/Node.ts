@@ -4,12 +4,13 @@ export default class Node {
   id: string;
   // distance is currently defaulted to 0, should probably be changed as this causes some
   // messiness in the main code
-  distTo = 0;
+  distTo = Number.MAX_SAFE_INTEGER;
   prevNode: Node;
   paths = new Array<Path>();
   visited = false;
 
-  constructor(i: string) {
+  constructor(i: string, dTo?: number) {
     this.id = i;
+    if (dTo !== undefined) this.distTo = dTo;
   }
 }
