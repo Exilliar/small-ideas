@@ -2,8 +2,8 @@ import Path from "./models/Path";
 
 export default class Node {
   id: string;
-  // distance is currently defaulted to 0, should probably be changed as this causes some
-  // messiness in the main code
+  // Set this to 0 manually for the instance that is the starting node
+  // can be done in the construtor or by setting it manually later
   distTo = Number.MAX_SAFE_INTEGER;
   prevNode: Node;
   paths = new Array<Path>();
