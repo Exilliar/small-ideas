@@ -1,5 +1,11 @@
 # dijkstra
 
+Basic Dijstra's algorithm script.
+
+More info on Dijstra's algorithm can be found on the [wiki](https://en.wikipedia.org/wiki/Dijkstra%27s_algorithm).
+
+The only part of the script that is not completely normal is that it uses an array of nodes rather than a queue to find the next node to search. The array is sorted to the shortest distance first and then the next node is found from that. A queue is not used is for simplicity. I'm not really sure how to use queues yet (or at least how to use them in typescript), so just went for a simplier implementation (from my perspective).
+
 ## Compiling/running
 
 Use command `tsc` when in the ./src folder to compile the project. This will generate .js files that can then be run with `node projectName.js`.
