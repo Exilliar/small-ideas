@@ -1,0 +1,16 @@
+import Path from "./models/Path";
+
+export default class Node {
+  id: string;
+  // Set this to 0 manually for the instance that is the starting node
+  // can be done in the construtor or by setting it manually later
+  distTo = Number.MAX_SAFE_INTEGER;
+  prevNode: Node;
+  paths = new Array<Path>();
+  visited = false;
+
+  constructor(i: string, dTo?: number) {
+    this.id = i;
+    if (dTo !== undefined) this.distTo = dTo;
+  }
+}
