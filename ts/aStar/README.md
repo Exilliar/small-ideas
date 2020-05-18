@@ -2,6 +2,8 @@
 
 A script for finding the shortest path between a set of nodes using the A\* algorithm. Very similar to the Dijkstra's Algorithm script.
 
+More info on the theory behind the A* algorithm can be found [here](https://en.wikipedia.org/wiki/A*\_search_algorithm)
+
 Main difference (other than being A\* rather than Dijkstra's) is that this script uses a Priority Queue instead of an array that is sorted every loop. The main reason for changing this is to:
 
 1. Make the main script file shorter/easier to read
