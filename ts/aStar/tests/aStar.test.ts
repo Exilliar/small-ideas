@@ -3,73 +3,73 @@ import aStar from "../src/aStar";
 
 // graph used https://www.101computing.net/wp/wp-content/uploads/A-Star-Search-Algorithm-Graph.png
 describe("A* basic graph", function () {
-    let nodes: Node[];
+  let nodes: Node[];
 
-    let a: Node;
-    let b: Node;
-    let c: Node;
-    let d: Node;
-    let e: Node;
-    let f: Node;
-    let z: Node;
+  let a: Node;
+  let b: Node;
+  let c: Node;
+  let d: Node;
+  let e: Node;
+  let f: Node;
+  let z: Node;
 
-    beforeEach(function () {
-        // create nodes
-        a = new Node("A", 21, 0);
-        b = new Node("B", 14);
-        c = new Node("C", 18);
-        d = new Node("D", 18);
-        e = new Node("E", 5);
-        f = new Node("F", 8);
-        z = new Node("Z", 0);
+  beforeEach(function () {
+    // create nodes
+    a = new Node("A", 21, 0);
+    b = new Node("B", 14);
+    c = new Node("C", 18);
+    d = new Node("D", 18);
+    e = new Node("E", 5);
+    f = new Node("F", 8);
+    z = new Node("Z", 0);
 
-        // create paths
-        a.paths.push({ node: b, distance: 9 });
-        a.paths.push({ node: c, distance: 4 });
-        a.paths.push({ node: d, distance: 7 });
+    // create paths
+    a.paths.push({ node: b, distance: 9 });
+    a.paths.push({ node: c, distance: 4 });
+    a.paths.push({ node: d, distance: 7 });
 
-        b.paths.push({ node: a, distance: 9 });
-        b.paths.push({ node: e, distance: 11 });
+    b.paths.push({ node: a, distance: 9 });
+    b.paths.push({ node: e, distance: 11 });
 
-        c.paths.push({ node: a, distance: 4 });
-        c.paths.push({ node: e, distance: 17 });
-        c.paths.push({ node: f, distance: 12 });
+    c.paths.push({ node: a, distance: 4 });
+    c.paths.push({ node: e, distance: 17 });
+    c.paths.push({ node: f, distance: 12 });
 
-        d.paths.push({ node: a, distance: 7 });
-        d.paths.push({ node: f, distance: 14 });
+    d.paths.push({ node: a, distance: 7 });
+    d.paths.push({ node: f, distance: 14 });
 
-        e.paths.push({ node: b, distance: 11 });
-        e.paths.push({ node: c, distance: 17 });
-        e.paths.push({ node: z, distance: 5 });
+    e.paths.push({ node: b, distance: 11 });
+    e.paths.push({ node: c, distance: 17 });
+    e.paths.push({ node: z, distance: 5 });
 
-        f.paths.push({ node: c, distance: 12 });
-        f.paths.push({ node: d, distance: 14 });
-        f.paths.push({ node: z, distance: 9 });
+    f.paths.push({ node: c, distance: 12 });
+    f.paths.push({ node: d, distance: 14 });
+    f.paths.push({ node: z, distance: 9 });
 
-        z.paths.push({ node: e, distance: 5 });
-        z.paths.push({ node: f, distance: 9 });
+    z.paths.push({ node: e, distance: 5 });
+    z.paths.push({ node: f, distance: 9 });
 
-        nodes = [a, b, c, d, e, f, z];
-    });
+    nodes = [a, b, c, d, e, f, z];
+  });
 
-    it("should calculate the correct route", function () {
-        const actual = aStar(nodes, a, z).path;
-        const expected = [a, c, f, z];
+  it("should calculate the correct route", function () {
+    const actual = aStar(nodes, a, z).path;
+    const expected = [a, c, f, z];
 
-        expect(actual).toEqual(expected);
-    });
+    expect(actual).toEqual(expected);
+  });
 
-    it("should visit the correct number of nodes", function () {
-        const acutal = aStar(nodes, a, z).nodesVisited;
-        const expected = 6;
+  it("should visit the correct number of nodes", function () {
+    const acutal = aStar(nodes, a, z).nodesVisited;
+    const expected = 6;
 
-        expect(acutal).toBe(expected);
-    });
+    expect(acutal).toBe(expected);
+  });
 });
 
 // graph used from https://www.youtube.com/watch?v=ySN5Wnu88nE
 describe("A* more complex graph", function () {
-    let nodes: Node[];
+  let nodes: Node[];
 
   let a: Node;
   let b: Node;

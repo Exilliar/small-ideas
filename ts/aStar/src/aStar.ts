@@ -1,24 +1,25 @@
 import Node from "./Node";
 import Output from "./models/Output";
+import PriorityQueue from "./PriorityQueue";
 
 function aStar(nodes: Node[], start: Node, end: Node): Output {
-  let currentNode = start;
+  let priorityQueue = new PriorityQueue(start);
+  let currentNode = priorityQueue.top;
   let nodesVisited = 0;
 
   while (currentNode.id !== end.id) {
-    calcDists(currentNode);
-    sortNodes(nodes);
-    currentNode = getShortestNode(nodes);
-    nodesVisited ++;
+    calcDists(currentNode, priorityQueue);
+    currentNode = priorityQueue.top;
+    nodesVisited++;
   }
 
   return {
-      path: getPath(end, start),
-      nodesVisited: nodesVisited
-    };
+    path: getPath(end, start),
+    nodesVisited: nodesVisited,
+  };
 }
 
-export function calcDists(node: Node) {
+export function calcDists(node: Node, priorityQueue: PriorityQueue) {
   const currentDist = node.distTo;
 
   node.paths.forEach((n) => {
@@ -27,31 +28,11 @@ export function calcDists(node: Node) {
     if (dist < n.node.distTo && n.node.visited == false) {
       n.node.distTo = dist;
       n.node.prevNode = node;
+      priorityQueue.add(n.node);
     }
   });
 
   node.visited = true;
-}
-export function sortNodes(nodes: Node[]) {
-  nodes.sort((a, b) => {
-    let aDist = a.distTo + a.geoDistTo;
-    let bDist = b.distTo + b.geoDistTo;
-
-    if (aDist < bDist) {
-      return -1;
-    } else if (aDist > bDist) {
-      return 1;
-    }
-    return 0;
-  });
-}
-// get the shortest node that has not yet been visited
-export function getShortestNode(nodes: Node[]): Node {
-  for (let i = 0; i < nodes.length; i++) {
-    let current = nodes[i];
-
-    if (current.visited === false) return current;
-  }
 }
 export function getPath(end: Node, start: Node): Node[] {
   let route = [end];
