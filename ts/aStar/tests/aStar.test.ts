@@ -3,8 +3,6 @@ import aStar from "../src/aStar";
 
 // graph used https://www.101computing.net/wp/wp-content/uploads/A-Star-Search-Algorithm-Graph.png
 describe("A* basic graph", function () {
-  let nodes: Node[];
-
   let a: Node;
   let b: Node;
   let c: Node;
@@ -48,19 +46,17 @@ describe("A* basic graph", function () {
 
     z.paths.push({ node: e, distance: 5 });
     z.paths.push({ node: f, distance: 9 });
-
-    nodes = [a, b, c, d, e, f, z];
   });
 
   it("should calculate the correct route", function () {
-    const actual = aStar(nodes, a, z).path;
+    const actual = aStar(a, z).path;
     const expected = [a, c, f, z];
 
     expect(actual).toEqual(expected);
   });
 
   it("should visit the correct number of nodes", function () {
-    const acutal = aStar(nodes, a, z).nodesVisited;
+    const acutal = aStar(a, z).nodesVisited;
     const expected = 6;
 
     expect(acutal).toBe(expected);
@@ -69,8 +65,6 @@ describe("A* basic graph", function () {
 
 // graph used from https://www.youtube.com/watch?v=ySN5Wnu88nE
 describe("A* more complex graph", function () {
-  let nodes: Node[];
-
   let a: Node;
   let b: Node;
   let c: Node;
@@ -150,20 +144,17 @@ describe("A* more complex graph", function () {
     s.paths.push({ node: a, distance: 7 });
     s.paths.push({ node: b, distance: 2 });
     s.paths.push({ node: c, distance: 3 });
-
-    // add to nodes array
-    nodes = [a, b, c, d, e, f, g, h, i, j, k, l, s];
   });
 
   it("should calculate the correct path", function () {
-    const actual = aStar(nodes, s, e).path;
+    const actual = aStar(s, e).path;
     const expected = [s, b, h, g, e];
 
     expect(actual).toEqual(expected);
   });
 
   it("should check the correct number of nodes", function () {
-    const actual = aStar(nodes, s, e).nodesVisited;
+    const actual = aStar(s, e).nodesVisited;
     const expected = 4;
 
     expect(actual).toBe(expected);

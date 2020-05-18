@@ -2,7 +2,7 @@ import Node from "./Node";
 import Output from "./models/Output";
 import PriorityQueue from "./PriorityQueue";
 
-function aStar(nodes: Node[], start: Node, end: Node): Output {
+function aStar(start: Node, end: Node): Output {
   let priorityQueue = new PriorityQueue(start);
   let currentNode = priorityQueue.top;
   let nodesVisited = 0;
