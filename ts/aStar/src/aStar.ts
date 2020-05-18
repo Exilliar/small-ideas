@@ -19,7 +19,7 @@ function aStar(start: Node, end: Node): Output {
   };
 }
 
-export function calcDists(node: Node, priorityQueue: PriorityQueue) {
+export function calcDists(node: Node, priorityQueue: PriorityQueue<Node>) {
   const currentDist = node.distTo;
 
   node.paths.forEach((n) => {
@@ -28,7 +28,10 @@ export function calcDists(node: Node, priorityQueue: PriorityQueue) {
     if (dist < n.node.distTo && n.node.visited == false) {
       n.node.distTo = dist;
       n.node.prevNode = node;
-      priorityQueue.add(n.node);
+      priorityQueue.add(
+        n.node,
+        (a, b) => a.distTo + a.geoDistTo < b.distTo + b.geoDistTo
+      );
     }
   });
 

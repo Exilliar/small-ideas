@@ -21,7 +21,7 @@ describe("Priority Queue", function () {
     it("should add single", function () {
       let queue = new PriorityQueue(a);
 
-      queue.add(b);
+      queue.add(b, (a, b) => a.distTo + a.geoDistTo < b.distTo + b.geoDistTo);
 
       expect(queue.all).toEqual([b, a]);
     });
@@ -29,8 +29,8 @@ describe("Priority Queue", function () {
     it("should add multiple", function () {
       let queue = new PriorityQueue(b);
 
-      queue.add(a);
-      queue.add(c);
+      queue.add(a, (a, b) => a.distTo + a.geoDistTo < b.distTo + b.geoDistTo);
+      queue.add(c, (a, b) => a.distTo + a.geoDistTo < b.distTo + b.geoDistTo);
 
       expect(queue.all).toEqual([b, c, a]);
     });
@@ -47,7 +47,7 @@ describe("Priority Queue", function () {
     });
     it("should remove the element", function () {
       let queue = new PriorityQueue(a);
-      queue.add(b);
+      queue.add(b, (a, b) => a.distTo + a.geoDistTo < b.distTo + b.geoDistTo);
 
       queue.top;
 

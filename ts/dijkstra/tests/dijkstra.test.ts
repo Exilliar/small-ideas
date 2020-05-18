@@ -57,15 +57,18 @@ describe("dijkstra, simple graph", function () {
     expect(actual).toEqual(expected);
   });
 
-  it("should have the correct final distance in end node", function () {
-    const actual1 = dijkstra(nodes, a, d)[2].distTo;
-    const expected1 = 5;
+  it("should have the correct final distance in end node 1", function () {
+    const actual = dijkstra(nodes, a, d)[2].distTo;
+    const expected = 5;
 
-    const actual2 = dijkstra(nodes, a, e)[3].distTo;
-    const expected2 = 9;
+    expect(actual).toBe(expected);
+  });
 
-    expect(actual1).toBe(expected1);
-    expect(actual2).toBe(expected2);
+  it("should have the correct final distance in end node 2", function () {
+    const actual = dijkstra(nodes, a, e)[3].distTo;
+    const expected = 9;
+
+    expect(actual).toBe(expected);
   });
 });
 

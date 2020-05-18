@@ -1,18 +1,21 @@
 import Node from "./Node";
+import PriorityQueue from "./PriorityQueue";
 
 function dijkstra(nodes: Node[], start: Node, end: Node) {
-  let currentNode = start;
+  let priorityQueue = new PriorityQueue(start);
+  let currentNode = priorityQueue.top;
 
   while (currentNode.id !== end.id) {
-    calcDists(currentNode);
-    sortNodes(nodes);
-    currentNode = getShortestNode(nodes);
+    calcDists(currentNode, priorityQueue);
+    currentNode = priorityQueue.top;
+    // sortNodes(nodes);
+    // currentNode = getShortestNode(nodes);
   }
 
   return getPath(end, start);
 }
 
-export function calcDists(node: Node) {
+export function calcDists(node: Node, priorityQueue: PriorityQueue<Node>) {
   const currentDist = node.distTo;
 
   node.paths.forEach((n) => {
@@ -21,6 +24,7 @@ export function calcDists(node: Node) {
     if (dist < n.node.distTo && n.node.visited == false) {
       n.node.distTo = dist;
       n.node.prevNode = node;
+      priorityQueue.add(n.node, (a, b) => a.distTo < b.distTo);
     }
   });
 
