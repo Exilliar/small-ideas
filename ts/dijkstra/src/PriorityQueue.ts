@@ -1,5 +1,3 @@
-import Node from "./Node";
-
 export default class PriorityQueue<T> {
   private queue: T[];
 
@@ -7,31 +5,27 @@ export default class PriorityQueue<T> {
     this.queue = [ini];
   }
 
-  add(node: T) {
-    if (this.queue.includes(node)) return;
+  add(newVal: T, fn: (toAdd: T, old: T) => boolean) {
+    if (this.queue.includes(newVal)) return;
 
     let updateArr = new Array<T>();
     let added = false;
-    const bDist = node.distTo;
 
     this.queue.forEach((q) => {
-      const aDist = q.distTo;
-
-      if (bDist < aDist && added === false) {
-        updateArr.push(node);
-        updateArr.push(q);
+      if (fn(newVal, q) && added === false) {
+        updateArr.push(newVal);
         added = true;
-      } else {
-        updateArr.push(q);
       }
+      updateArr.push(q);
     });
 
-    if (updateArr.length === this.queue.length) updateArr.push(node);
+    if (updateArr.length === this.queue.length) updateArr.push(newVal);
 
     this.queue = updateArr;
   }
 
   get top() {
+    if (this.queue.length === 0) return undefined;
     const topValue = this.queue[0];
 
     this.queue.shift();
