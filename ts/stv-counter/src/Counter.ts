@@ -24,7 +24,7 @@ export class Counter {
   countRound(): Party {
     let winner: Party;
 
-    this.parties = this.countVotes(this.parties, this.ballots);
+    this.countVotes(this.parties, this.ballots);
     winner = this.checkWinner(this.numVotes, this.winners, this.parties);
 
     if (!winner) {
@@ -35,7 +35,7 @@ export class Counter {
     return winner;
   }
 
-  countVotes(parties: Party[], ballots: Ballot[]): Party[] {
+  countVotes(parties: Party[], ballots: Ballot[]): void {
     parties.forEach((p) => {
       let voteCount = 0;
       ballots.forEach((b) => {
@@ -45,7 +45,6 @@ export class Counter {
       });
       p.votes = voteCount;
     });
-    return parties;
   }
 
   // currently only works for one party

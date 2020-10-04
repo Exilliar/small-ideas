@@ -15,9 +15,9 @@ describe("testData1", () => {
     );
   });
   it("should calc the votes correctly", () => {
-    let actual = counter.countVotes(data.parties, data.ballots);
+    counter.countVotes(data.parties, data.ballots);
 
-    expect(actual).toEqual(data.expected.countVotes);
+    expect(data.parties).toEqual(data.expected.countVotes);
   });
   it("should find the winner", () => {
     let actual = counter.findWinner();

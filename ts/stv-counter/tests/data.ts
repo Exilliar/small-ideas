@@ -91,6 +91,7 @@ export { testData1 };
 
 // function to copy over the values from the test object (ie. testData1) into whatever data object is used in the test file
 // a new function is needed cuz copying object values (not references) is super annoying
+// and a custom copy function was needed
 export function copy(obj: TestData): TestData {
   let newObj: TestData = {} as TestData;
 
