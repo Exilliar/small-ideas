@@ -1,54 +1,27 @@
 import { Counter } from "../src/Counter";
-import * as data from "./data";
+import { TestData, testData1, copy } from "./data";
 
-describe("findWinner", () => {
+describe("testData1", () => {
   let counter: Counter;
+  let data: TestData;
   beforeEach(() => {
-    console.log("before");
+    data = copy(testData1);
     counter = new Counter(
       data.parties,
       data.parties.length,
       data.ballots,
       data.ballots.length,
-      1
+      data.winners,
     );
   });
-  describe("countVotes", () => {
-    it("should calc the votes correctly", () => {
-      counter.countVotes();
+  it("should calc the votes correctly", () => {
+    let actual = counter.countVotes(data.parties, data.ballots);
 
-      expect(counter.parties).toEqual([
-        {
-          id: 0,
-          name: "party 1",
-          votes: 2,
-          lost: false,
-        },
-        {
-          id: 1,
-          name: "party 2",
-          votes: 1,
-          lost: false,
-        },
-        {
-          id: 2,
-          name: "party 3",
-          votes: 1,
-          lost: false,
-        },
-        {
-          id: 3,
-          name: "party 4",
-          votes: 1,
-          lost: false,
-        },
-      ]);
-    });
+    expect(actual).toEqual(data.expected.countVotes);
   });
   it("should find the winner", () => {
     let actual = counter.findWinner();
-    let expected = data.parties[0];
 
-    expect(actual.id).toBe(expected.id);
+    expect(actual.id).toBe(data.expected.findWinner);
   });
 });

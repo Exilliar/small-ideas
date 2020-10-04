@@ -1,6 +1,5 @@
 import { Ballot } from "./Ballot";
 import { Party } from "./models/Party";
-import * as data from "../tests/data";
 
 export class Counter {
   constructor(
@@ -8,50 +7,61 @@ export class Counter {
     public numParties: number,
     public ballots: Ballot[],
     public numVotes: number,
-    public winners: number // the number of available "winner" positions
+    public winners: number, // the number of available "winner" positions
   ) {}
 
   findWinner(): Party {
     let winner: Party;
 
     while (!winner) {
-      this.countVotes();
-      winner = this.checkWinner();
-      if (!winner) {
-        let lowest = this.findLowest();
-        this.incVotes(lowest);
-      }
+      winner = this.countRound();
     }
 
     return winner;
   }
 
-  countVotes(): void {
-    this.parties.forEach((p) => {
+  // A single round of counting
+  countRound(): Party {
+    let winner: Party;
+
+    this.parties = this.countVotes(this.parties, this.ballots);
+    winner = this.checkWinner(this.numVotes, this.winners, this.parties);
+
+    if (!winner) {
+      let lowest = this.findLowest(this.parties);
+      this.incVotes(lowest, this.ballots);
+    }
+
+    return winner;
+  }
+
+  countVotes(parties: Party[], ballots: Ballot[]): Party[] {
+    parties.forEach((p) => {
       let voteCount = 0;
-      this.ballots.forEach((b) => {
+      ballots.forEach((b) => {
         if (b.getVote().id === p.id) {
           voteCount++;
         }
       });
       p.votes = voteCount;
     });
+    return parties;
   }
 
   // currently only works for one party
-  checkWinner(): Party {
-    const votesNeeded = this.numVotes / (this.winners + 1);
-    for (let i = 0; i < this.parties.length; i++) {
-      if (this.parties[i].votes > votesNeeded) {
-        return this.parties[i];
+  checkWinner(numVotes: number, winners: number, parties: Party[]): Party {
+    const votesNeeded = numVotes / (winners + 1);
+    for (let i = 0; i < parties.length; i++) {
+      if (parties[i].votes > votesNeeded) {
+        return parties[i];
       }
     }
   }
 
-  findLowest(): Party {
-    let lowest = this.parties[0];
+  findLowest(parties: Party[]): Party {
+    let lowest = parties[0];
 
-    this.parties.forEach((p) => {
+    parties.forEach((p) => {
       if (p.votes < lowest.votes && p.lost !== true) {
         lowest = p;
       }
@@ -62,21 +72,11 @@ export class Counter {
     return lowest;
   }
 
-  incVotes(lowest: Party): void {
-    this.ballots.forEach((b) => {
+  incVotes(lowest: Party, ballots: Ballot[]): void {
+    ballots.forEach((b) => {
       if (b.getVote().id === lowest.id) {
         b.incRank();
       }
     });
   }
 }
-
-// let counter = new Counter(
-//   data.parties,
-//   data.parties.length,
-//   data.ballots,
-//   data.ballots.length,
-//   1
-// );
-
-// console.log("winner:", counter.findWinner());
