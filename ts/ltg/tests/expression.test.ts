@@ -42,3 +42,24 @@ describe("more complex expressions (multiple operators)", () => {
     expect(actual).toEqual(expected);
   });
 });
+
+describe("Full expression test", () => {
+  it("should fully calculate the result of AvB: A=1, B=0, res=1", () => {
+    const controller = new TreeController("AvB");
+    controller.head.propogateVal([
+      {
+        letter: "A",
+        val: true,
+      },
+      {
+        letter: "B",
+        val: false,
+      },
+    ]);
+
+    const actual = controller.head.calcRes();
+    const expected = true;
+
+    expect(actual).toBe(expected);
+  });
+});

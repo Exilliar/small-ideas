@@ -1,4 +1,5 @@
-import { LtgNode, Operators, NumberNode, OperatorNode } from "./";
+import { NumberNode, OperatorNode } from ".";
+import { LtgNode, Operators } from "..";
 
 export class TreeController {
   operators: string[] = ["^", "v"];

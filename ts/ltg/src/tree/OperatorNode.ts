@@ -1,6 +1,4 @@
-import { LtgNode, NumberNode } from "./";
-
-export type Operators = "v" | "^";
+import { LtgNode, NumberNode, Operators, LetterVal } from "..";
 
 export class OperatorNode {
   operator: Operators;
@@ -39,5 +37,14 @@ export class OperatorNode {
     }
 
     return returnVal;
+  }
+
+  // function to set the vals of NumberNodes based on their letters
+  propogateVal(letterVal: LetterVal[]) {
+    if (this.leftNode instanceof NumberNode) this.leftNode.setVal(letterVal);
+    else if (this.leftNode instanceof OperatorNode) this.leftNode.propogateVal(letterVal);
+
+    if (this.rightNode instanceof NumberNode) this.rightNode.setVal(letterVal);
+    else if (this.leftNode instanceof OperatorNode) this.rightNode.propogateVal(letterVal);
   }
 }

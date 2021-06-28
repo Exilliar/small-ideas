@@ -1,4 +1,4 @@
-import { NumberNode, OperatorNode } from "../src/tree";
+import { LetterVal, NumberNode, OperatorNode } from "../src/";
 
 describe("basic trees (1 level)", () => {
   it("should calc 1 v 0 = 1", () => {
@@ -57,6 +57,34 @@ describe("more complex trees (2 levels)", () => {
     const op1 = new OperatorNode(num1, num2, "v");
     const op2 = new OperatorNode(num3, num4, "^");
     const op3 = new OperatorNode(op1, op2, "^");
+
+    const actual = op3.calcRes();
+    const expected = false;
+
+    expect(actual).toBe(expected);
+  });
+});
+
+describe('Value propogation', () => {
+  it('should propogate values correctly for (A v B) ^ (A ^ B): A=1, B=0 - calcRes should return 0', () => {
+    const num1 = new NumberNode({ letter: "A" });
+    const num2 = new NumberNode({ letter: "B" });
+    const num3 = new NumberNode({ letter: "A" });
+    const num4 = new NumberNode({ letter: "B" });
+
+    const op1 = new OperatorNode(num1, num2, "v");
+    const op2 = new OperatorNode(num3, num4, "^");
+    const op3 = new OperatorNode(op1, op2, "^");
+
+    const letterVal: LetterVal[] = [{
+      letter: "A",
+      val: true
+    }, {
+      letter: "B",
+      val: false
+    }];
+
+    op3.propogateVal(letterVal);
 
     const actual = op3.calcRes();
     const expected = false;
