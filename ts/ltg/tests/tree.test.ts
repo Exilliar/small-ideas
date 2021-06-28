@@ -1,7 +1,7 @@
-import { LtgNode, NumberNode, OperatorNode } from "../src/tree";
+import { NumberNode, OperatorNode } from "../src/tree";
 
-describe("basic trees (1 level)", function () {
-  it("should calc 1 v 0 = 1", function () {
+describe("basic trees (1 level)", () => {
+  it("should calc 1 v 0 = 1", () => {
     const num1 = new NumberNode(true);
     const num2 = new NumberNode(false);
     const op = new OperatorNode(num1, num2, "v");
@@ -10,7 +10,7 @@ describe("basic trees (1 level)", function () {
 
     expect(actual).toBe(expected);
   });
-  it("should calc 1 ^ 0 = 0", function () {
+  it("should calc 1 ^ 0 = 0", () => {
     const num1 = new NumberNode(true);
     const num2 = new NumberNode(false);
     const op = new OperatorNode(num1, num2, "^");
@@ -21,8 +21,8 @@ describe("basic trees (1 level)", function () {
   });
 });
 
-describe("more complex trees (2 levels)", function () {
-  it("should calc (1 v 0) ^ 1 = 1", function () {
+describe("more complex trees (2 levels)", () => {
+  it("should calc (1 v 0) ^ 1 = 1", () => {
     const num1 = new NumberNode(true);
     const num2 = new NumberNode(false);
     const num3 = new NumberNode(true);
@@ -35,7 +35,7 @@ describe("more complex trees (2 levels)", function () {
 
     expect(actual).toBe(expected);
   });
-  it("should calc (1 v 0) ^ 0 = 0", function () {
+  it("should calc (1 v 0) ^ 0 = 0", () => {
     const num1 = new NumberNode(true);
     const num2 = new NumberNode(false);
     const num3 = new NumberNode(false);
@@ -47,5 +47,20 @@ describe("more complex trees (2 levels)", function () {
     const expected = false;
 
     expect(actual).toBe(expected);
+  });
+  it('should calc (1 v 0) ^ (1 ^ 0) = 0', () => {
+      const num1 = new NumberNode(true);
+      const num2 = new NumberNode(false);
+      const num3 = new NumberNode(true);
+      const num4 = new NumberNode(false);
+
+      const op1 = new OperatorNode(num1, num2, "v");
+      const op2 = new OperatorNode(num3, num4, "^");
+      const op3 = new OperatorNode(op1, op2, "^");
+
+      const actual = op3.calcRes();
+      const expected = false;
+
+      expect(actual).toBe(expected);
   });
 });
