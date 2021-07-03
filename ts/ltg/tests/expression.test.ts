@@ -1,4 +1,9 @@
-import { NumberNode, OperatorNode, TreeController } from "../src/tree";
+import {
+  LetterValResults,
+  NumberNode,
+  OperatorNode,
+  TreeController,
+} from "../src/tree";
 
 describe("basic expresssion (one operator)", () => {
   it("should properly convert AvB --> head = ON(NN(A),NN(B),'v')", () => {
@@ -61,5 +66,69 @@ describe("Full expression test", () => {
     const expected = true;
 
     expect(actual).toBe(expected);
+  });
+});
+
+describe("full results test", () => {
+  it("should calc all results for AvB", () => {
+    const controller = new TreeController("AvB");
+
+    const actual = controller.calcResults();
+    const expected: LetterValResults[] = [
+      {
+        letterVals: [
+          {
+            letter: "A",
+            val: false,
+          },
+          {
+            letter: "B",
+            val: false,
+          },
+        ],
+        result: false,
+      },
+      {
+        letterVals: [
+          {
+            letter: "A",
+            val: false,
+          },
+          {
+            letter: "B",
+            val: true,
+          },
+        ],
+        result: true,
+      },
+      {
+        letterVals: [
+          {
+            letter: "A",
+            val: true,
+          },
+          {
+            letter: "B",
+            val: false,
+          },
+        ],
+        result: true,
+      },
+      {
+        letterVals: [
+          {
+            letter: "A",
+            val: true,
+          },
+          {
+            letter: "B",
+            val: true,
+          },
+        ],
+        result: true,
+      },
+    ];
+
+    expect(actual).toEqual(expected);
   });
 });

@@ -1,10 +1,18 @@
 import { NumberNode, OperatorNode } from ".";
 import { LtgNode, Operators } from "..";
+import { LetterVal } from "../models";
+
+export interface LetterValResults {
+  letterVals: LetterVal[];
+  result: boolean;
+}
 
 export class TreeController {
   operators: string[] = ["^", "v"];
   nodes: LtgNode[] = [];
   head: OperatorNode;
+
+  letters: string[] = [];
 
   constructor(exp: string) {
     const expression = exp.replace(/\s/g, ""); // remove spaces from expression
@@ -14,8 +22,10 @@ export class TreeController {
     let expNumber: Array<NumberNode | string> = []; // array for the combo number nodes and operator strings
     for (let i = 0; i < expression.length; i++) {
       const curr = expressionArr[i];
-      if (!this.operators.includes(curr))
+      if (!this.operators.includes(curr)) {
         expNumber.push(new NumberNode({ letter: curr }));
+        if (!this.letters.includes(curr)) this.letters.push(curr);
+      }
       else expNumber.push(curr);
     }
 
@@ -38,5 +48,54 @@ export class TreeController {
 
     // expOp will only have one val now, which should be the head OperatorNode, so that can be set to head, and the tree is complete
     this.head = expOp[0] as OperatorNode;
+  }
+
+  calcResults() {
+    const numDigits = Math.pow(2, this.letters.length);
+    let binary = Array(this.letters.length).fill(false);
+    const startLetterVal: LetterVal[] = this.letters.map((l, x) => {
+      return {
+        letter: l,
+        val: binary[x]
+      }
+    })
+    this.head.propogateVal(startLetterVal);
+    let letterValResults: LetterValResults[] = [{
+      letterVals: startLetterVal,
+      result: this.head.calcRes()
+    }];
+
+    for (let i = 0; i < numDigits - 1; i++) {
+      this.binInc(binary).map(b => b);
+      const letterVal: LetterVal[] = this.letters.map((l, x) => {
+        return {
+          letter: l,
+          val: binary[x]
+        }
+      });
+      this.head.propogateVal(letterVal);
+      letterValResults.push({
+        letterVals: letterVal,
+        result: this.head.calcRes()
+      })
+    }
+    return letterValResults;
+  }
+
+  binInc(binary: boolean[]) {
+    let setTrue = false;
+    let i = binary.length - 1;
+
+    while (!setTrue) {
+      if (binary[i]) {
+        binary[i] = false;
+      } else {
+        binary[i] = true;
+        setTrue = true;
+      }
+      i--;
+    }
+
+    return binary; // not really needed, but it makes the function's perpose explicit
   }
 }
